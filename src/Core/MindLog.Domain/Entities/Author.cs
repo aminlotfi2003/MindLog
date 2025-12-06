@@ -1,10 +1,10 @@
-﻿using MindLog.SharedKernel.Abstractions;
+﻿using MindLog.Domain.Common;
+using MindLog.SharedKernel.Abstractions;
 
 namespace MindLog.Domain.Entities;
 
-public class Author : IEntity<Guid>, IAuditableEntity, ISoftDeletable
+public class Author : EntityBase<Guid>, IAuditableEntity, ISoftDeletable
 {
-    public Guid Id { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? ModifiedAt { get; set; }
     public bool IsDeleted { get; set; }

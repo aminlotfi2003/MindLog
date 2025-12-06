@@ -1,18 +1,19 @@
-﻿using MindLog.Domain.Enums;
+﻿using MindLog.Domain.Common;
+using MindLog.Domain.Enums;
 using MindLog.SharedKernel.Abstractions;
 
 namespace MindLog.Domain.Entities;
 
-public class Book : IEntity<Guid>, IAuditableEntity, ISoftDeletable
+public class Book : EntityBase<Guid>, IAuditableEntity, ISoftDeletable
 {
-    public Guid Id { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? ModifiedAt { get; set; }
     public bool IsDeleted { get; set; }
     public DateTimeOffset? DeletedAt { get; set; }
 
-    public Guid AuthorId { get; private set; }
-    public Author Author { get; private set; } = default!;
+    public Guid AuthorId { get; set; }
+    public Author Author { get; set; } = default!;
+
     public string Title { get; set; } = default!;
     public string Slug { get; set; } = default!;
     public string CoverImagePath { get; set; } = default!;
