@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5CC2992E-96B2-44FB-BB78-AFCAEB724CD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6912CFBD-BAF5-464D-8D8A-6289FA64BE40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FBC3D6FE-4AD5-447C-A1B0-DCF5EFE9E7C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4E969526-D5B1-4ABA-AC2E-3E0409D02FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.SharedKernel", "src\Shared\MindLog.SharedKernel\MindLog.SharedKernel.csproj", "{014A33C4-9ABF-42B2-BF56-31D74C55B229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.Domain", "src\Core\MindLog.Domain\MindLog.Domain.csproj", "{9C682CF4-DAAE-43D1-88CE-4425CA0E721B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.Application", "src\Core\MindLog.Application\MindLog.Application.csproj", "{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.Infrastructure.Persistence", "src\Infrastructure\MindLog.Infrastructure.Persistence\MindLog.Infrastructure.Persistence.csproj", "{5CEF514B-3D33-4330-B8C6-3E337C182FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.Infrastructure.Identity", "src\Infrastructure\MindLog.Infrastructure.Identity\MindLog.Infrastructure.Identity.csproj", "{3DDD2859-791E-41A2-85D5-2D95382BD493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.Infrastructure.Shared", "src\Infrastructure\MindLog.Infrastructure.Shared\MindLog.Infrastructure.Shared.csproj", "{29C4B088-941B-49BC-BD2B-81B38B3A0F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindLog.WebApp", "src\Presentation\MindLog.WebApp\MindLog.WebApp.csproj", "{C39E80A7-59BA-4668-8EF7-185A00FDB2B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{014A33C4-9ABF-42B2-BF56-31D74C55B229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014A33C4-9ABF-42B2-BF56-31D74C55B229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014A33C4-9ABF-42B2-BF56-31D74C55B229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014A33C4-9ABF-42B2-BF56-31D74C55B229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C682CF4-DAAE-43D1-88CE-4425CA0E721B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C682CF4-DAAE-43D1-88CE-4425CA0E721B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C682CF4-DAAE-43D1-88CE-4425CA0E721B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C682CF4-DAAE-43D1-88CE-4425CA0E721B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CEF514B-3D33-4330-B8C6-3E337C182FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CEF514B-3D33-4330-B8C6-3E337C182FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CEF514B-3D33-4330-B8C6-3E337C182FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CEF514B-3D33-4330-B8C6-3E337C182FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDD2859-791E-41A2-85D5-2D95382BD493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDD2859-791E-41A2-85D5-2D95382BD493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDD2859-791E-41A2-85D5-2D95382BD493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDD2859-791E-41A2-85D5-2D95382BD493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C4B088-941B-49BC-BD2B-81B38B3A0F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C4B088-941B-49BC-BD2B-81B38B3A0F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C4B088-941B-49BC-BD2B-81B38B3A0F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C4B088-941B-49BC-BD2B-81B38B3A0F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39E80A7-59BA-4668-8EF7-185A00FDB2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39E80A7-59BA-4668-8EF7-185A00FDB2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39E80A7-59BA-4668-8EF7-185A00FDB2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39E80A7-59BA-4668-8EF7-185A00FDB2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CC2992E-96B2-44FB-BB78-AFCAEB724CD1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6912CFBD-BAF5-464D-8D8A-6289FA64BE40} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FBC3D6FE-4AD5-447C-A1B0-DCF5EFE9E7C5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4E969526-D5B1-4ABA-AC2E-3E0409D02FA2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{014A33C4-9ABF-42B2-BF56-31D74C55B229} = {4E969526-D5B1-4ABA-AC2E-3E0409D02FA2}
+		{9C682CF4-DAAE-43D1-88CE-4425CA0E721B} = {5CC2992E-96B2-44FB-BB78-AFCAEB724CD1}
+		{D2EB43D8-39C4-4B0F-96FC-6F00F5B7C7E8} = {5CC2992E-96B2-44FB-BB78-AFCAEB724CD1}
+		{5CEF514B-3D33-4330-B8C6-3E337C182FFF} = {6912CFBD-BAF5-464D-8D8A-6289FA64BE40}
+		{3DDD2859-791E-41A2-85D5-2D95382BD493} = {6912CFBD-BAF5-464D-8D8A-6289FA64BE40}
+		{29C4B088-941B-49BC-BD2B-81B38B3A0F67} = {6912CFBD-BAF5-464D-8D8A-6289FA64BE40}
+		{C39E80A7-59BA-4668-8EF7-185A00FDB2B4} = {FBC3D6FE-4AD5-447C-A1B0-DCF5EFE9E7C5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1B16767-413B-473E-9E3D-0937D8D30282}
+	EndGlobalSection
+EndGlobal
