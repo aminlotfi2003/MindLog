@@ -12,7 +12,6 @@ public class ApplicationUser : IdentityUser<Guid>, IAuditableEntity
 
     public DateTimeOffset? PasswordLastChangedAt { get; set; }
     public bool MustChangePasswordOnNextLogin { get; set; }
-    public bool IsActive { get; set; } = true;
 
     public ICollection<UserLoginHistory> LoginHistories { get; set; } = new HashSet<UserLoginHistory>();
     public ICollection<UserPasswordHistory> PasswordHistories { get; set; } = new HashSet<UserPasswordHistory>();
