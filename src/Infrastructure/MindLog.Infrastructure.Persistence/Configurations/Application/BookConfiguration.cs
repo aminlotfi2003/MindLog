@@ -55,6 +55,8 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
             .HasColumnType("int")
             .IsRequired();
 
+        builder.HasIndex(x => x.Slug).IsUnique();
+
         builder.HasOne(x => x.Author)
             .WithMany(u => u.Books)
             .HasForeignKey(x => x.AuthorId);
