@@ -1,7 +1,10 @@
+using MindLog.WebApp.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 
