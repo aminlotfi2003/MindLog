@@ -1,0 +1,33 @@
+﻿@page "{id:guid}"
+@model MindLog.WebApp.Pages.Authors.EditModel
+
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<h1>Edit Author</h1>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form method="post">
+    <input asp-for="Input.Id" type="hidden" />
+
+    <div class="mb-3">
+        <label asp-for="Input.FirstName" class="form-label"></label>
+        <input asp-for="Input.FirstName" class="form-control" />
+        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.LastName" class="form-label"></label>
+        <input asp-for="Input.LastName" class="form-control" />
+        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

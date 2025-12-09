@@ -61,7 +61,7 @@ public static class ServiceCollectionExtensions
             });
 
         // Register Services
-        services.AddScoped<ITokenService, TokenService>();
+        //services.AddScoped<ITokenService, TokenService>();
 
         return services;
     }
