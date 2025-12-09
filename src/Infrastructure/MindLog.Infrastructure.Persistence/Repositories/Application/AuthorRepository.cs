@@ -26,4 +26,15 @@ public class AuthorRepository : EfRepository<Guid, Author>, IAuthorRepository
             .FirstOrDefaultAsync(a => a.Id == id, cancellationToken)
             .ConfigureAwait(false);
     }
+
+    public async Task<Author?> GetWithBooksIncludingDeletedAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        return await _authors
+            .IgnoreQueryFilters()
+            .Include(a => a.Books)
+            .FirstOrDefaultAsync(a => a.Id == id, cancellationToken)
+            .ConfigureAwait(false);
+    }
 }

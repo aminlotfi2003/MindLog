@@ -19,13 +19,24 @@ public sealed class RestoreAuthorCommandHandler: IRequestHandler<RestoreAuthorCo
 
     public async Task<Unit> Handle(RestoreAuthorCommand request, CancellationToken cancellationToken)
     {
-        var author = await _repo.GetByIdAsync(request.Id, cancellationToken);
+        var author = await _repo.GetByIdIncludingDeletedAsync(request.Id, cancellationToken);
 
         if (author is null)
             throw new NotFoundException($"Author with Id '{request.Id}' was not found.");
 
         if (!author.IsDeleted)
             return Unit.Value;
+
+        var existsDuplicateActive = await _repo.AnyAsync(
+            a => !a.IsDeleted &&
+                 a.Id != author.Id &&
+                 a.FirstName == author.FirstName &&
+                 a.LastName == author.LastName,
+            cancellationToken
+        );
+
+        if (existsDuplicateActive)
+            throw new ConflictException("Another active author with the same name already exists.");
 
         author.Restore();
 
