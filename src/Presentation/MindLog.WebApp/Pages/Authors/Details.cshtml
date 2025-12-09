@@ -1,0 +1,55 @@
+﻿@page "{id:guid}"
+@model MindLog.WebApp.Pages.Authors.DetailsModel
+
+@{
+    ViewData["Title"] = "Author Details";
+}
+
+<h1>Author Details</h1>
+
+<div>
+    <h4>@($"{Model.Author.FirstName} {Model.Author.LastName}")</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Created</dt>
+        <dd class="col-sm-10">@Model.Author.CreatedAt</dd>
+
+        <dt class="col-sm-2">Modified</dt>
+        <dd class="col-sm-10">@Model.Author.ModifiedAt</dd>
+    </dl>
+</div>
+
+<h3>Books</h3>
+
+@if (Model.Author.Books.Count == 0)
+{
+    <p>No books yet.</p>
+}
+else
+{
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Category</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.Author.Books)
+            {
+                <tr>
+                    <td>@b.Title</td>
+                    <td>@b.Status</td>
+                    <td>@b.Category</td>
+                    <td>@(b.Rating?.ToString() ?? "-")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p>
+    <a asp-page="Edit" asp-route-id="@Model.Author.Id">Edit</a> |
+    <a asp-page="Index">Back to list</a>
+</p>
