@@ -29,10 +29,30 @@ public class EfRepository<TId, TEntity> : IRepository<TId, TEntity>
             .ConfigureAwait(false);
     }
 
+    public async Task<TEntity?> GetByIdIncludingDeletedAsync(
+        TId id,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbSet
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(e => e.Id!.Equals(id), cancellationToken)
+            .ConfigureAwait(false);
+    }
+
     public async Task<IReadOnlyList<TEntity>> ListAsync(
         CancellationToken cancellationToken = default)
     {
         return await _dbSet
+            .AsNoTracking()
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<IReadOnlyList<TEntity>> ListIncludingDeletedAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbSet
+            .IgnoreQueryFilters()
             .AsNoTracking()
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);

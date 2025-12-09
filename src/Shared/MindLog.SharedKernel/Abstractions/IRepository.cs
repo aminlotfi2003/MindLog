@@ -7,8 +7,10 @@ public interface IRepository<TId, TEntity> where TEntity : IEntity<TId>
     IQueryable<TEntity> Query();
 
     Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetByIdIncludingDeletedAsync(TId id, CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<TEntity>> ListAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<TEntity>> ListIncludingDeletedAsync(CancellationToken cancellationToken = default);
 
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
