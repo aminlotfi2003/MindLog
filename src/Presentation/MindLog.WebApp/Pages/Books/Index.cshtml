@@ -1,11 +1,10 @@
 ﻿@page
-@model MindLog.WebApp.Pages.Authors.IndexModel
-
+@model MindLog.WebApp.Pages.Books.IndexModel
 @{
-    ViewData["Title"] = "Authors";
+    ViewData["Title"] = "Books";
 }
 
-<h1>Authors</h1>
+<h1>Books</h1>
 
 @if (TempData["ErrorMessage"] is string error)
 {
@@ -17,24 +16,30 @@
 }
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">Create New Author</a>
-    <a asp-page="Deleted" class="btn btn-outline-secondary ms-2">Deleted Authors</a>
+    <a asp-page="Create" class="btn btn-primary">Create New Book</a>
+    <a asp-page="Deleted" class="btn btn-outline-secondary ms-2">Deleted Books</a>
 </p>
 
 <table class="table table-striped table-bordered text-center">
     <thead>
         <tr>
-            <th>Full Name</th>
-            <th>Books</th>
+            <th>Title</th>
+            <th>Author Name</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th>CreatedAt</th>
             <th>Operations</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var a in Model.Authors)
+        @foreach (var a in Model.Books)
         {
             <tr>
-                <td>@($"{a.FirstName} {a.LastName}")</td>
-                <td>@a.BooksCount</td>
+                <td>@a.Title</td>
+                <td>@a.AuthorName</td>
+                <td>@a.Category.ToString()</td>
+                <td>@a.Rating</td>
+                <td>@a.CreatedAt</td>
                 <td>
                     <a asp-page="Details" asp-route-id="@a.Id">Details</a> |
                     <a asp-page="Edit" asp-route-id="@a.Id">Edit</a> |

@@ -6,7 +6,7 @@ using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.Application.Features.Authors.Commands.RestoreAuthor;
 
-public sealed class RestoreAuthorCommandHandler: IRequestHandler<RestoreAuthorCommand, Unit>
+public sealed class RestoreAuthorCommandHandler : IRequestHandler<RestoreAuthorCommand, Unit>
 {
     private readonly IAuthorRepository _repo;
     private readonly IUnitOfWork _uow;
@@ -29,9 +29,9 @@ public sealed class RestoreAuthorCommandHandler: IRequestHandler<RestoreAuthorCo
 
         var existsDuplicateActive = await _repo.AnyAsync(
             a => !a.IsDeleted &&
-                 a.Id != author.Id &&
-                 a.FirstName == author.FirstName &&
-                 a.LastName == author.LastName,
+                  a.Id != author.Id &&
+                  a.FirstName == author.FirstName &&
+                  a.LastName == author.LastName,
             cancellationToken
         );
 
