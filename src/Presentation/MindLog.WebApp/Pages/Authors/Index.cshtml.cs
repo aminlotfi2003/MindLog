@@ -5,6 +5,7 @@ using MindLog.Application.Features.Authors.Commands.DeleteAuthor;
 using MindLog.Application.Features.Authors.Commands.RestoreAuthor;
 using MindLog.Application.Features.Authors.Dtos;
 using MindLog.Application.Features.Authors.Queries.GetAuthors;
+using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.WebApp.Pages.Authors;
 
@@ -26,7 +27,16 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostDeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new DeleteAuthorCommand(id), cancellationToken);
+        try
+        {
+            await _mediator.Send(new DeleteAuthorCommand(id), cancellationToken);
+            TempData["SuccessMessage"] = "Author deleted successfully.";
+        }
+        catch (NotFoundException ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
+        }
+
         return RedirectToPage();
     }
 
