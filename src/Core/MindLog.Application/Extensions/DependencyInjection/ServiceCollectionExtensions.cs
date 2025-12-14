@@ -21,8 +21,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-        //services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
-        //services.AddScoped<IPasswordPolicyService, PasswordPolicyService>();
+        services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+        services.AddScoped<IPasswordPolicyService, PasswordPolicyService>();
 
         return services;
     }
