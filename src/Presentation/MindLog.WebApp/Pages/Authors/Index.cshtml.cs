@@ -1,4 +1,4 @@
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MindLog.Application.Features.Authors.Commands.DeleteAuthor;
@@ -30,7 +30,7 @@ public class IndexModel : PageModel
         try
         {
             await _mediator.Send(new DeleteAuthorCommand(id), cancellationToken);
-            TempData["SuccessMessage"] = "Author deleted successfully.";
+            TempData["SuccessMessage"] = "نویسنده با موفقیت حذف شد.";
         }
         catch (NotFoundException ex)
         {

@@ -1,0 +1,24 @@
+﻿@{
+    var success = TempData["SuccessMessage"] as string;
+    var error = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrWhiteSpace(error))
+{
+    <div class="alert alert-danger shadow-sm alert-soft" role="alert">
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">خطا</span>
+            <span>@error</span>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(success))
+{
+    <div class="alert alert-success shadow-sm alert-soft" role="alert">
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-success-subtle text-success-emphasis rounded-pill">موفق</span>
+            <span>@success</span>
+        </div>
+    </div>
+}

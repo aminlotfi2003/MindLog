@@ -2,29 +2,40 @@
 @model MindLog.WebApp.Pages.Authors.CreateModel
 
 @{
-    ViewData["Title"] = "Create Author";
+    ViewData["Title"] = "ایجاد نویسنده";
 }
 
-<h1>Create Author</h1>
-
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-<form method="post">
-    <div class="mb-3">
-        <label asp-for="Input.FirstName" class="form-label"></label>
-        <input asp-for="Input.FirstName" class="form-control" />
-        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">ثبت نویسنده جدید</p>
+        <h1 class="page-title h4 mb-2">نویسنده تازه‌ای به MindLog اضافه کنید</h1>
+        <p class="page-subtitle">اطلاعات را دقیق وارد کنید تا در فهرست کتاب‌ها و نویسنده‌ها به شکل یکپارچه نمایش داده شود.</p>
     </div>
+    <a asp-page="Index" class="btn btn-outline-secondary">بازگشت به فهرست</a>
+</section>
 
-    <div class="mb-3">
-        <label asp-for="Input.LastName" class="form-label"></label>
-        <input asp-for="Input.LastName" class="form-control" />
-        <span asp-validation-for="Input.LastName" class="text-danger"></span>
-    </div>
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="col-md-6">
+            <label asp-for="Input.FirstName" class="form-label"></label>
+            <input asp-for="Input.FirstName" class="form-control" placeholder="نام نویسنده" />
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Input.LastName" class="form-label"></label>
+            <input asp-for="Input.LastName" class="form-control" placeholder="نام خانوادگی" />
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ذخیره نویسنده</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

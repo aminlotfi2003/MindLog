@@ -19,4 +19,11 @@ public interface IBookRepository : IRepository<Guid, Book>
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<BookListItemDto>> GetBooksListAsync(CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<BookListItemDto>> GetBooksListIncludingDeletedAsync(CancellationToken cancellationToken = default);
+
+    Task<BookDetailsDto?> GetBookDetailsAsync(
+        Guid id,
+        bool includeDeleted = false,
+        CancellationToken cancellationToken = default);
 }

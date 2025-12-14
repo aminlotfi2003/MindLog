@@ -61,9 +61,33 @@ public class BookRepository : EfRepository<Guid, Book>, IBookRepository
                 b.Id,
                 b.Title,
                 $"{b.Author.FirstName} {b.Author.LastName}",
+                b.Status,
                 b.Category,
                 b.Rating,
-                b.CreatedAt))
+                b.CreatedAt,
+                b.Slug,
+                b.IsDeleted,
+                b.DeletedAt))
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<BookListItemDto>> GetBooksListIncludingDeletedAsync(CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Books
+            .IgnoreQueryFilters()
+            .AsNoTracking()
+            .OrderByDescending(b => b.CreatedAt)
+            .Select(b => new BookListItemDto(
+                b.Id,
+                b.Title,
+                $"{b.Author.FirstName} {b.Author.LastName}",
+                b.Status,
+                b.Category,
+                b.Rating,
+                b.CreatedAt,
+                b.Slug,
+                b.IsDeleted,
+                b.DeletedAt))
             .ToListAsync(cancellationToken);
     }
 
@@ -85,9 +109,40 @@ public class BookRepository : EfRepository<Guid, Book>, IBookRepository
                 b.Rating,
                 b.CreatedAt,
                 b.ModifiedAt,
-                b.AuthorId))
+                b.AuthorId,
+                b.DeletedAt))
             .SingleOrDefaultAsync(cancellationToken);
 
         return book;
+    }
+
+    public async Task<BookDetailsDto?> GetBookDetailsAsync(
+        Guid id,
+        bool includeDeleted = false,
+        CancellationToken cancellationToken = default)
+    {
+        var query = _dbContext.Books.AsNoTracking();
+
+        if (includeDeleted)
+            query = query.IgnoreQueryFilters();
+
+        return await query
+            .Where(b => b.Id == id)
+            .Select(b => new BookDetailsDto(
+                b.Id,
+                b.Title,
+                $"{b.Author.FirstName} {b.Author.LastName}",
+                b.Slug,
+                b.CoverImagePath,
+                b.Status,
+                b.Category,
+                b.ShortSummary,
+                b.FullReview,
+                b.Rating,
+                b.CreatedAt,
+                b.ModifiedAt,
+                b.AuthorId,
+                b.DeletedAt))
+            .SingleOrDefaultAsync(cancellationToken);
     }
 }

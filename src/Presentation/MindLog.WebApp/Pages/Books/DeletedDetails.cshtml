@@ -1,0 +1,49 @@
+﻿@page "{id:guid}"
+@model MindLog.WebApp.Pages.Books.DeletedDetailsModel
+@{
+    ViewData["Title"] = "جزئیات حذف کتاب";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">سوابق حذف</p>
+        <h1 class="page-title h4 mb-2">@Model.Book.Title</h1>
+        <p class="page-subtitle">حذف در تاریخ: @(Model.Book.DeletedAt?.ToString() ?? "نامشخص")</p>
+    </div>
+    <a asp-page="Deleted" class="btn btn-outline-secondary">بازگشت به فهرست حذف‌شده</a>
+</section>
+
+<div class="glass-card p-4 mb-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">نویسنده</p>
+            <strong>@Model.Book.AuthorName</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">وضعیت مطالعه</p>
+            <strong>@(Model.Book.Status switch { ReadingStatus.Read => "خوانده‌شده", ReadingStatus.Reading => "در حال مطالعه", _ => "برای مطالعه" })</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">دسته‌بندی</p>
+            <strong>@(Model.Book.Category == BookCategory.Technical ? "فنی" : Model.Book.Category == BookCategory.NonTechnical ? "غیرفنی" : "متفرقه")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">امتیاز</p>
+            <strong>@(Model.Book.Rating?.ToString() ?? "ثبت نشده")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">زمان ایجاد</p>
+            <strong>@Model.Book.CreatedAt</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4 mb-3">
+    <h2 class="h6 mb-2">خلاصه کوتاه</h2>
+    <p class="mb-0">@Model.Book.ShortSummary</p>
+</div>
+
+<div class="glass-card p-4">
+    <h2 class="h6 mb-2">مرور کامل</h2>
+    <p class="mb-0">@Model.Book.FullReview</p>
+</div>

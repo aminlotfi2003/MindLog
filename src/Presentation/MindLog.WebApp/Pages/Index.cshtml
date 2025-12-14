@@ -1,10 +1,34 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "خانه";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">MindLog • مدیریت دانش خوانندگان</p>
+        <h1 class="page-title h3 mb-2">کتاب‌ها و نویسنده‌های فارسی را با ظاهری حرفه‌ای دنبال کنید</h1>
+        <p class="page-subtitle">رابط کاربری راست‌چین، پیام‌های کاملاً فارسی و رنگ‌بندی مدرن برای تجربه‌ای روان و زیبا.</p>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <span class="badge badge-soft-primary px-3 py-2">UI فارسی</span>
+        <span class="badge bg-gradient-primary px-3 py-2 text-dark">MindLog</span>
+    </div>
+</section>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="glass-card p-4 h-100">
+            <h2 class="h5 mb-2">کتاب‌ها</h2>
+            <p class="card-meta">مرور، ثبت و بازیابی کتاب‌ها با جزئیات کامل و پیام‌های فارسی.</p>
+            <a class="btn btn-primary mt-2" asp-page="/Books/Index">ورود به فهرست کتاب‌ها</a>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="glass-card p-4 h-100">
+            <h2 class="h5 mb-2">نویسندگان</h2>
+            <p class="card-meta">مدیریت نویسندگان، به‌روزرسانی اطلاعات و مشاهده آثار ثبت‌شده.</p>
+            <a class="btn btn-outline-secondary mt-2" asp-page="/Authors/Index">ورود به فهرست نویسندگان</a>
+        </div>
+    </div>
 </div>

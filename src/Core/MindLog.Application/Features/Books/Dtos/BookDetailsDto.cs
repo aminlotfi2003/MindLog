@@ -16,7 +16,8 @@ public sealed record BookDetailsDto(
     int? Rating,
     DateTimeOffset CreatedAt,
     DateTimeOffset? ModifiedAt,
-    Guid AuthorId
+    Guid AuthorId,
+    DateTimeOffset? DeletedAt
 )
 {
     public static BookDetailsDto FromEntity(Book book) =>
@@ -33,6 +34,7 @@ public sealed record BookDetailsDto(
             book.Rating,
             book.CreatedAt,
             book.ModifiedAt,
-            book.AuthorId
+            book.AuthorId,
+            book.DeletedAt
         );
 }

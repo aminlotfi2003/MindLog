@@ -1,0 +1,77 @@
+﻿@page "{id:guid}"
+@model MindLog.WebApp.Pages.Books.EditModel
+
+@{
+    ViewData["Title"] = "ویرایش کتاب";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">ویرایش و بازنگری</p>
+        <h1 class="page-title h4 mb-2">کتاب را در MindLog به‌روز کنید</h1>
+        <p class="page-subtitle">تغییرات بلافاصله در فهرست کتاب‌ها قابل مشاهده است.</p>
+    </div>
+    <a asp-page="Details" asp-route-id="@Model.Input.Id" class="btn btn-outline-secondary">مشاهده جزئیات</a>
+</section>
+
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Input.Id" type="hidden" />
+
+        <div class="col-md-6">
+            <label asp-for="Input.AuthorId" class="form-label"></label>
+            <select asp-for="Input.AuthorId" asp-items="Model.AuthorOptions" class="form-select"></select>
+            <span asp-validation-for="Input.AuthorId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Title" class="form-label"></label>
+            <input asp-for="Input.Title" class="form-control" />
+            <span asp-validation-for="Input.Title" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Slug" class="form-label"></label>
+            <input asp-for="Input.Slug" class="form-control" />
+            <span asp-validation-for="Input.Slug" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.CoverImagePath" class="form-label"></label>
+            <input asp-for="Input.CoverImagePath" class="form-control" />
+            <span asp-validation-for="Input.CoverImagePath" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Status" class="form-label"></label>
+            <select asp-for="Input.Status" asp-items="Model.StatusOptions" class="form-select"></select>
+            <span asp-validation-for="Input.Status" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Category" class="form-label"></label>
+            <select asp-for="Input.Category" asp-items="Model.CategoryOptions" class="form-select"></select>
+            <span asp-validation-for="Input.Category" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.ShortSummary" class="form-label"></label>
+            <textarea asp-for="Input.ShortSummary" class="form-control" rows="2"></textarea>
+            <span asp-validation-for="Input.ShortSummary" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.FullReview" class="form-label"></label>
+            <textarea asp-for="Input.FullReview" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Input.FullReview" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Input.Rating" class="form-label"></label>
+            <input asp-for="Input.Rating" class="form-control" type="number" min="1" max="5" />
+            <span asp-validation-for="Input.Rating" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ثبت تغییرات</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

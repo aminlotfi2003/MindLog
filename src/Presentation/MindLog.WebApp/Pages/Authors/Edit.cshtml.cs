@@ -1,4 +1,4 @@
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MindLog.Application.Features.Authors.Commands.UpdateAuthor;
@@ -22,12 +22,12 @@ public class EditModel : PageModel
         [HiddenInput]
         public Guid Id { get; set; }
 
-        [Required, StringLength(100)]
-        [Display(Name = "First name")]
+        [Required(ErrorMessage = "وارد کردن نام الزامی است."), StringLength(100, ErrorMessage = "نام نباید بیش از ۱۰۰ کاراکتر باشد.")]
+        [Display(Name = "نام")]
         public string FirstName { get; set; } = default!;
 
-        [Required, StringLength(100)]
-        [Display(Name = "Last name")]
+        [Required(ErrorMessage = "وارد کردن نام خانوادگی الزامی است."), StringLength(100, ErrorMessage = "نام خانوادگی نباید بیش از ۱۰۰ کاراکتر باشد.")]
+        [Display(Name = "نام خانوادگی")]
         public string LastName { get; set; } = default!;
     }
 

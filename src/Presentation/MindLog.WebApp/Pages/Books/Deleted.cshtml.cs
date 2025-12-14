@@ -1,18 +1,18 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MindLog.Application.Features.Books.Commands.DeleteBook;
+using MindLog.Application.Features.Books.Commands.RestoreBook;
 using MindLog.Application.Features.Books.Dtos;
-using MindLog.Application.Features.Books.Queries.GetBooks;
+using MindLog.Application.Features.Books.Queries.GetDeletedBooks;
 using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.WebApp.Pages.Books;
 
-public class IndexModel : PageModel
+public class DeletedModel : PageModel
 {
     private readonly IMediator _mediator;
 
-    public IndexModel(IMediator mediator)
+    public DeletedModel(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -21,17 +21,17 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync(CancellationToken cancellationToken)
     {
-        Books = await _mediator.Send(new GetBooksQuery(), cancellationToken);
+        Books = await _mediator.Send(new GetDeletedBooksQuery(), cancellationToken);
     }
 
-    public async Task<IActionResult> OnPostDeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> OnPostRestoreAsync(Guid id, CancellationToken cancellationToken)
     {
         try
         {
-            await _mediator.Send(new DeleteBookCommand(id), cancellationToken);
-            TempData["SuccessMessage"] = "کتاب با موفقیت حذف شد.";
+            await _mediator.Send(new RestoreBookCommand(id), cancellationToken);
+            TempData["SuccessMessage"] = "کتاب با موفقیت بازیابی شد.";
         }
-        catch (NotFoundException ex)
+        catch (ConflictException ex)
         {
             TempData["ErrorMessage"] = ex.Message;
         }

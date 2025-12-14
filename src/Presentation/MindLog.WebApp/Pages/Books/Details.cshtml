@@ -1,0 +1,52 @@
+﻿@page "{id:guid}"
+@model MindLog.WebApp.Pages.Books.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات کتاب";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">نمای کلی کتاب</p>
+        <h1 class="page-title h4 mb-2">@Model.Book.Title</h1>
+        <p class="page-subtitle">نویسنده: @Model.Book.AuthorName | وضعیت: @(Model.Book.Status switch { ReadingStatus.Read => "خوانده‌شده", ReadingStatus.Reading => "در حال مطالعه", _ => "برای مطالعه" })</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-primary">ویرایش</a>
+        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+    </div>
+</section>
+
+<div class="glass-card p-4 mb-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">دسته‌بندی</p>
+            <strong>@(Model.Book.Category == BookCategory.Technical ? "فنی" : Model.Book.Category == BookCategory.NonTechnical ? "غیرفنی" : "متفرقه")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">امتیاز</p>
+            <strong>@(Model.Book.Rating?.ToString() ?? "ثبت نشده")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">زمان ایجاد</p>
+            <strong>@Model.Book.CreatedAt</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">آخرین ویرایش</p>
+            <strong>@(Model.Book.ModifiedAt?.ToString() ?? "-")</strong>
+        </div>
+        <div class="col-12">
+            <p class="mb-1 text-muted">تصویر جلد</p>
+            <strong>@Model.Book.CoverImagePath</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4 mb-3">
+    <h2 class="h6 mb-2">خلاصه کوتاه</h2>
+    <p class="mb-0">@Model.Book.ShortSummary</p>
+</div>
+
+<div class="glass-card p-4">
+    <h2 class="h6 mb-2">مرور کامل</h2>
+    <p class="mb-0">@Model.Book.FullReview</p>
+</div>
