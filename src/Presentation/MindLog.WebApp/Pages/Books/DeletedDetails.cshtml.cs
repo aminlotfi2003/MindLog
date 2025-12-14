@@ -1,34 +1,33 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MindLog.Application.Features.Authors.Dtos;
-using MindLog.Application.Features.Authors.Queries.GetAuthorDetails;
+using MindLog.Application.Features.Books.Dtos;
+using MindLog.Application.Features.Books.Queries.GetBookDetails;
 using MindLog.SharedKernel.Exceptions;
 
-namespace MindLog.WebApp.Pages.Authors;
+namespace MindLog.WebApp.Pages.Books;
 
-public class DetailsModel : PageModel
+public class DeletedDetailsModel : PageModel
 {
     private readonly IMediator _mediator;
 
-    public DetailsModel(IMediator mediator)
+    public DeletedDetailsModel(IMediator mediator)
     {
         _mediator = mediator;
     }
 
-    public AuthorDetailsDto Author { get; private set; } = default!;
+    public BookDetailsDto Book { get; private set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid id, CancellationToken cancellationToken)
     {
         try
         {
-            Author = await _mediator.Send(new GetAuthorDetailsQuery(id), cancellationToken);
+            Book = await _mediator.Send(new GetBookDetailsQuery(id, true), cancellationToken);
+            return Page();
         }
         catch (NotFoundException)
         {
             return NotFound();
         }
-
-        return Page();
     }
 }

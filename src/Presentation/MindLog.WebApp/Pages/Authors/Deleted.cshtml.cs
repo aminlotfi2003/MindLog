@@ -29,7 +29,7 @@ public class DeletedModel : PageModel
         try
         {
             await _mediator.Send(new RestoreAuthorCommand(id), cancellationToken);
-            TempData["SuccessMessage"] = "Author restored successfully.";
+            TempData["SuccessMessage"] = "نویسنده با موفقیت بازیابی شد.";
         }
         catch (ConflictException ex)
         {

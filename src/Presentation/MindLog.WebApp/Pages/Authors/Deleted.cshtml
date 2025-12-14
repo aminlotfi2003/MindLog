@@ -2,58 +2,51 @@
 @model MindLog.WebApp.Pages.Authors.DeletedModel
 
 @{
-    ViewData["Title"] = "Deleted Authors";
+    ViewData["Title"] = "نویسندگان حذف‌شده";
 }
 
-<h1>Deleted Authors</h1>
-
-@if (TempData["ErrorMessage"] is string error)
-{
-    <div class="alert alert-danger">@error</div>
-}
-@if (TempData["SuccessMessage"] is string success)
-{
-    <div class="alert alert-success">@success</div>
-}
-
-<p>
-    <a asp-page="Index" class="btn btn-secondary">Back to active authors</a>
-</p>
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">مدیریت بازیابی</p>
+        <h1 class="page-title h4 mb-2">نویسندگان حذف‌شده</h1>
+        <p class="page-subtitle">هر زمان لازم بود می‌توانید نویسنده را بازگردانید و از پیام‌های فارسی سیستم راهنمایی بگیرید.</p>
+    </div>
+    <a asp-page="Index" class="btn btn-outline-secondary">بازگشت به نویسندگان فعال</a>
+</section>
 
 @if (Model.Authors.Count == 0)
 {
-    <p>No deleted authors.</p>
+    <div class="glass-card p-4">هیچ نویسنده‌ای در حالت حذف‌شده نیست.</div>
 }
 else
 {
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Books</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var a in Model.Authors)
-            {
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
                 <tr>
-                    <td>@($"{a.FirstName} {a.LastName}")</td>
-                    <td>@a.BooksCount</td>
-                    <td>
-                        <a asp-page="DeletedDetails" asp-route-id="@a.Id">Details</a> |
-
-                        <form method="post"
-                              asp-page-handler="Restore"
-                              asp-route-id="@a.Id"
-                              style="display:inline">
-                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
-                                Restore
-                            </button>
-                        </form>
-                    </td>
+                    <th>نام کامل</th>
+                    <th>تعداد کتاب</th>
+                    <th>عملیات</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.Authors)
+                {
+                    <tr>
+                        <td>@($"{a.FirstName} {a.LastName}")</td>
+                        <td>@a.BooksCount</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="DeletedDetails" asp-route-id="@a.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            <form method="post"
+                                  asp-page-handler="Restore"
+                                  asp-route-id="@a.Id"
+                                  class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-primary">بازیابی</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }

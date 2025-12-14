@@ -16,10 +16,14 @@ public sealed class GetBookDetailsQueryHandler : IRequestHandler<GetBookDetailsQ
 
     public async Task<BookDetailsDto> Handle(GetBookDetailsQuery request, CancellationToken cancellationToken)
     {
-        var book = await _repo.GetBookDetailsBySlugAsync(request.Slug, cancellationToken);
+        var book = await _repo.GetBookDetailsAsync(
+            request.Id,
+            request.IncludeDeleted,
+            cancellationToken
+        );
 
         if (book is null)
-            throw new NotFoundException($"Book with slug '{request.Slug}' was not found.");
+            throw new NotFoundException($"Book with Id '{request.Id}' was not found.");
 
         return book;
     }

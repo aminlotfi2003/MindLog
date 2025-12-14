@@ -1,51 +1,68 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MindLog.WebApp</title>
+    <title>@ViewData["Title"] - MindLog</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MindLog.WebApp.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body class="app-body">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-dark app-navbar shadow-sm">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">MindLog.WebApp</a>
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-area="" asp-page="/Index">
+                    <span class="brand-mark">MindLog</span>
+                    <span class="brand-subtitle">کتاب‌نگار هوشمند</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="تغییر منو">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 align-items-lg-center gap-2">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">خانه</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/Authors/Index">نویسندگان</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Authors/Index">Authors</a>
+                            <a class="nav-link" asp-area="" asp-page="/Books/Index">کتاب‌ها</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Books/Index">Books</a>
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">حریم خصوصی</a>
                         </li>
                     </ul>
+                    <div class="navbar-text text-light small">
+                        <span class="me-2">تجربه‌ای متمرکز بر فارسی</span>
+                        <span class="badge rounded-pill bg-gradient-primary">نسخه پیش‌نمایش</span>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+        <main role="main" class="py-4">
+            <div class="content-surface shadow-sm">
+                @await Html.PartialAsync("_StatusBanner")
+                @RenderBody()
+                @await Html.PartialAsync("_UxGuidelines")
+            </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - MindLog.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="app-footer text-muted">
+        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+            <div>
+                &copy; 2025 - MindLog | همه حقوق محفوظ است
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="small text-light">طراحی حرفه‌ای برای خوانندگان فارسی‌زبان</span>
+                <a asp-area="" asp-page="/Privacy" class="link-light">قوانین حریم خصوصی</a>
+            </div>
         </div>
     </footer>
 
