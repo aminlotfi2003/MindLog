@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Authors.Commands.RestoreAuthor;
 using MindLog.Application.Features.Authors.Dtos;
 using MindLog.Application.Features.Authors.Queries.GetDeletedAuthors;
@@ -8,6 +10,7 @@ using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.WebApp.Pages.Authors;
 
+[Authorize(Policy = ApplicationRoles.Admin)]
 public class DeletedModel : PageModel
 {
     private readonly IMediator _mediator;

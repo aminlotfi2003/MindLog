@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Authors.Dtos;
 using MindLog.Application.Features.Authors.Queries.GetAuthors;
 using MindLog.Application.Features.Books.Commands.CreateBook;
@@ -11,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MindLog.WebApp.Pages.Books;
 
+[Authorize(Policy = ApplicationRoles.Admin)]
 public class CreateModel : PageModel
 {
     private readonly IMediator _mediator;

@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Books.Commands.DeleteBook;
 using MindLog.Application.Features.Books.Dtos;
 using MindLog.Application.Features.Books.Queries.GetBooks;
