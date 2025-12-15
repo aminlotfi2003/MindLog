@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Authors.Commands.UpdateAuthor;
 using MindLog.Application.Features.Authors.Queries.GetAuthorDetails;
 using MindLog.SharedKernel.Exceptions;
@@ -8,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MindLog.WebApp.Pages.Authors;
 
+[Authorize(Policy = ApplicationRoles.Admin)]
 public class EditModel : PageModel
 {
     private readonly IMediator _mediator;

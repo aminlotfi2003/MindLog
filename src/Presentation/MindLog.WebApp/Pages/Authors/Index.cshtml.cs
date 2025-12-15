@@ -1,14 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Authors.Commands.DeleteAuthor;
-using MindLog.Application.Features.Authors.Commands.RestoreAuthor;
 using MindLog.Application.Features.Authors.Dtos;
 using MindLog.Application.Features.Authors.Queries.GetAuthors;
 using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.WebApp.Pages.Authors;
 
+[Authorize(Policy = ApplicationRoles.Admin)]
 public class IndexModel : PageModel
 {
     private readonly IMediator _mediator;

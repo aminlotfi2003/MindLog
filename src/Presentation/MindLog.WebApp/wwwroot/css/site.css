@@ -200,3 +200,8 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+.login-form-wrapper {
+    max-width: 420px;
+    width: 100%;
+}

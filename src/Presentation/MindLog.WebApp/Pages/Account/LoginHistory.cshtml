@@ -1,0 +1,57 @@
+﻿@page
+@model MindLog.WebApp.Pages.Account.LoginHistoryModel
+@{
+    ViewData["Title"] = "سوابق ورود";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">گزارش امنیتی</p>
+        <h1 class="page-title h4 mb-2">سوابق ورود مدیر</h1>
+        <p class="page-subtitle">آخرین ورودهای شما به همراه وضعیت موفقیت و اطلاعات دستگاه.</p>
+    </div>
+</section>
+
+<div class="glass-card p-0">
+    <table class="table table-hover align-middle mb-0 text-center">
+        <thead>
+            <tr>
+                <th>زمان</th>
+                <th>وضعیت</th>
+                <th>تعداد خطا قبل از این ورود</th>
+                <th>IP</th>
+                <th>میزبان</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.History.Count == 0)
+            {
+                <tr>
+                    <td colspan="5">ورودی ثبت نشده است.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var log in Model.History)
+                {
+                    <tr>
+                        <td>@log.OccurredAt.ToLocalTime()</td>
+                        <td>
+                            @if (log.Success)
+                            {
+                                <span class="badge bg-success">موفق</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">ناموفق</span>
+                            }
+                        </td>
+                        <td>@log.FailureCountBeforeSuccess</td>
+                        <td>@(string.IsNullOrWhiteSpace(log.IpAddress) ? "-" : log.IpAddress)</td>
+                        <td>@(string.IsNullOrWhiteSpace(log.Host) ? "-" : log.Host)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

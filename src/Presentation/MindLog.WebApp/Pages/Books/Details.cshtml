@@ -11,8 +11,15 @@
         <p class="page-subtitle">نویسنده: @Model.Book.AuthorName | وضعیت: @(Model.Book.Status switch { ReadingStatus.Read => "خوانده‌شده", ReadingStatus.Reading => "در حال مطالعه", _ => "برای مطالعه" })</p>
     </div>
     <div class="d-flex gap-2">
-        <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-primary">ویرایش</a>
-        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-primary">ویرایش</a>
+            <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+        }
+        else
+        {
+            <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+        }
     </div>
 </section>
 

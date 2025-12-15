@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MindLog.Application.Common.Models;
 using MindLog.Application.Features.Books.Commands.RestoreBook;
 using MindLog.Application.Features.Books.Dtos;
 using MindLog.Application.Features.Books.Queries.GetDeletedBooks;
@@ -8,6 +10,7 @@ using MindLog.SharedKernel.Exceptions;
 
 namespace MindLog.WebApp.Pages.Books;
 
+[Authorize(Policy = ApplicationRoles.Admin)]
 public class DeletedModel : PageModel
 {
     private readonly IMediator _mediator;
