@@ -25,6 +25,12 @@ public class ApplicationDbContext : IdentityDbContext<
 
     public DbSet<Author> Authors => Set<Author>();
     public DbSet<Book> Books => Set<Book>();
+    public DbSet<EducationRecord> Educations => Set<EducationRecord>();
+    public DbSet<LanguageProficiency> Languages => Set<LanguageProficiency>();
+    public DbSet<PersonalProfile> Profiles => Set<PersonalProfile>();
+    public DbSet<SkillItem> Skills => Set<SkillItem>();
+    public DbSet<TrainingCourse> Courses => Set<TrainingCourse>();
+    public DbSet<WorkExperience> WorkExperiences => Set<WorkExperience>();
 
     public DbSet<UserLoginHistory> UserLoginHistories => Set<UserLoginHistory>();
     public DbSet<UserPasswordHistory> UserPasswordHistories => Set<UserPasswordHistory>();
