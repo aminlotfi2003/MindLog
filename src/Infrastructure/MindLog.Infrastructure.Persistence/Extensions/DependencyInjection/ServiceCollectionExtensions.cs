@@ -32,6 +32,12 @@ public static class ServiceCollectionExtensions
         // Register Application Repositories
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IEducationRecordRepository, EducationRecordRepository>();
+        services.AddScoped<ILanguageProficiencyRepository, LanguageProficiencyRepository>();
+        services.AddScoped<IPersonalProfileRepository, PersonalProfileRepository>();
+        services.AddScoped<ISkillItemRepository, SkillItemRepository>();
+        services.AddScoped<ITrainingCourseRepository, TrainingCourseRepository>();
+        services.AddScoped<IWorkExperienceRepository, WorkExperienceRepository>();
 
         // Register Identity Repositories
         services.AddScoped<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
