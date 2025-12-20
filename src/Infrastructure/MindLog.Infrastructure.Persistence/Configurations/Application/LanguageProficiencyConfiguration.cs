@@ -28,5 +28,7 @@ public class LanguageProficiencyConfiguration : IEntityTypeConfiguration<Languag
         builder.HasOne(x => x.Profile)
             .WithMany(y => y.Languages)
             .HasForeignKey(x => x.ProfileId);
+
+        builder.HasIndex(x => x.Language).IsUnique();
     }
 }

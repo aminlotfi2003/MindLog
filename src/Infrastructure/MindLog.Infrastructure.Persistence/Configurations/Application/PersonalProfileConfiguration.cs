@@ -23,28 +23,41 @@ public class PersonalProfileConfiguration : IEntityTypeConfiguration<PersonalPro
             .HasMaxLength(100)
             .IsRequired();
 
-        builder.OwnsOne(x => x.ContactInfo, cfg =>
-        {
-            cfg.Property(y => y.Email)
+        builder.Property(x => x.Summary)
+            .IsRequired(false);
+
+        builder.Property(x => x.BirthDate)
+            .IsRequired(false);
+
+        builder.Property(y => y.Email)
                 .HasColumnName("Email")
                 .HasMaxLength(500);
 
-            cfg.Property(y => y.PhoneNumber)
-                .HasColumnName("PhoneNumber")
-                .HasMaxLength(50);
+        builder.HasIndex(x => x.Email).IsUnique();
 
-            cfg.Property(y => y.Website)
-                .HasColumnName("Website")
-                .HasMaxLength(500);
+        builder.Property(y => y.PhoneNumber)
+            .HasColumnName("PhoneNumber")
+            .HasMaxLength(50);
 
-            cfg.Property(y => y.LinkedInUrl)
-                .HasColumnName("LinkedInUrl")
-                .HasMaxLength(500);
+        builder.HasIndex(x => x.PhoneNumber).IsUnique();
 
-            cfg.Property(y => y.GitHubUrl)
-                .HasColumnName("GitHubUrl")
-                .HasMaxLength(500);
-        });
+        builder.Property(y => y.Website)
+            .HasColumnName("Website")
+            .HasMaxLength(500);
+
+        builder.HasIndex(x => x.Website).IsUnique();
+
+        builder.Property(y => y.LinkedInUrl)
+            .HasColumnName("LinkedInUrl")
+            .HasMaxLength(500);
+
+        builder.HasIndex(x => x.LinkedInUrl).IsUnique();
+
+        builder.Property(y => y.GitHubUrl)
+            .HasColumnName("GitHubUrl")
+            .HasMaxLength(500);
+
+        builder.HasIndex(x => x.GitHubUrl).IsUnique();
 
         builder.Property(y => y.Address)
             .HasMaxLength(100);
@@ -91,5 +104,7 @@ public class PersonalProfileConfiguration : IEntityTypeConfiguration<PersonalPro
             .WithOne(y => y.Profile)
             .HasForeignKey(y => y.ProfileId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(x => x.FullName).IsUnique();
     }
 }

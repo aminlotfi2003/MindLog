@@ -48,7 +48,7 @@ public sealed class CreateCourseCommandHandler : IRequestHandler<CreateCourseCom
         );
 
         await _courseRepo.AddAsync(course, cancellationToken);
-        await _uow.SaveChangesAsync();
+        await _uow.SaveChangesAsync(cancellationToken);
 
         return course.Id;
     }

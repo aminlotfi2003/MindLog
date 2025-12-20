@@ -44,5 +44,7 @@ public class WorkExperienceConfiguration : IEntityTypeConfiguration<WorkExperien
         builder.HasOne(x => x.Profile)
             .WithMany(y => y.WorkExperiences)
             .HasForeignKey(x => x.ProfileId);
+
+        builder.HasIndex(x => x.RoleTitle);
     }
 }

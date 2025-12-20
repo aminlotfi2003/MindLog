@@ -28,5 +28,7 @@ public class SkillItemConfiguration : IEntityTypeConfiguration<SkillItem>
         builder.HasOne(x => x.Profile)
             .WithMany(y => y.Skills)
             .HasForeignKey(x => x.ProfileId);
+
+        builder.HasIndex(x => x.Name).IsUnique();
     }
 }

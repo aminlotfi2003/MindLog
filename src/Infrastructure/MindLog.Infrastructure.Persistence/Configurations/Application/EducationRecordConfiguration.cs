@@ -39,5 +39,7 @@ public class EducationRecordConfiguration : IEntityTypeConfiguration<EducationRe
         builder.HasOne(x => x.Profile)
             .WithMany(y => y.Educations)
             .HasForeignKey(x => x.ProfileId);
+
+        builder.HasIndex(x => x.FieldOfStudy).IsUnique();
     }
 }

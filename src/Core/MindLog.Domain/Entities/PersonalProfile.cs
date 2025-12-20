@@ -11,12 +11,15 @@ public class PersonalProfile : EntityBase<Guid>, IAuditableEntity
 
     // Header / Summary
     public string FullName { get; private set; } = default!;
-    public string? Headline { get; private set; }
     public string? Summary { get; private set; }
-    public DateTimeOffset? BirthDate { get; private set; }
+    public DateOnly? BirthDate { get; private set; }
 
     // Contact & Address
-    public ContactInfo ContactInfo { get; private set; } = default!;
+    public string? Email { get; private set; }
+    public string? PhoneNumber { get; private set; }
+    public string? Website { get; private set; }
+    public string? LinkedInUrl { get; private set; }
+    public string? GitHubUrl { get; private set; }
     public string? Address { get; private set; }
 
     // Profile image metadata
@@ -42,9 +45,13 @@ public class PersonalProfile : EntityBase<Guid>, IAuditableEntity
 
     public static PersonalProfile Create(
         string fullName,
-        ContactInfo contactInfo,
-        string? headline = null,
         string? summary = null,
+        DateOnly? BirthDate = null,
+        string? email = null,
+        string? phoneNumber = null,
+        string? website = null,
+        string? linkedInUrl = null,
+        string? gitHubUrl = null,
         string? address = null)
     {
         if (string.IsNullOrWhiteSpace(fullName))
@@ -53,9 +60,13 @@ public class PersonalProfile : EntityBase<Guid>, IAuditableEntity
         return new PersonalProfile
         {
             FullName = fullName.Trim(),
-            Headline = headline?.Trim(),
             Summary = summary?.Trim(),
-            ContactInfo = contactInfo,
+            BirthDate = BirthDate,
+            Email = email?.Trim(),
+            PhoneNumber = phoneNumber?.Trim(),
+            Website = website?.Trim(),
+            LinkedInUrl = linkedInUrl?.Trim(),
+            GitHubUrl = gitHubUrl?.Trim(),
             Address = address
         };
     }
@@ -66,11 +77,22 @@ public class PersonalProfile : EntityBase<Guid>, IAuditableEntity
             throw new ArgumentException("Full name is required.", nameof(fullName));
 
         FullName = fullName.Trim();
-        Headline = headline?.Trim();
         Summary = summary?.Trim();
     }
 
-    public void UpdateContact(ContactInfo contactInfo) => ContactInfo = contactInfo;
+    public void UpdateContact(
+        string? email = null,
+        string? phoneNumber = null,
+        string? website = null,
+        string? linkedInUrl = null,
+        string? gitHubUrl = null)
+    {
+        Email = email?.Trim();
+        PhoneNumber = phoneNumber?.Trim();
+        Website = website?.Trim();
+        LinkedInUrl = linkedInUrl?.Trim();
+        GitHubUrl = gitHubUrl?.Trim();
+    }
 
     public void UpdateAddress(string? address) => Address = address;
 
