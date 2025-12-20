@@ -4,7 +4,7 @@ using MindLog.Application.Features.Skills.Dtos;
 
 namespace MindLog.Application.Features.Skills.Queries.GetDeletedSkills;
 
-public class GetDeletedSkillsQueryHandler : IRequestHandler<GetDeletedSkillsQuery, IReadOnlyList<SkillListItemDto>
+public class GetDeletedSkillsQueryHandler : IRequestHandler<GetDeletedSkillsQuery, IReadOnlyList<SkillListItemDto>>
 {
     private readonly ISkillItemRepository _repo;
 
