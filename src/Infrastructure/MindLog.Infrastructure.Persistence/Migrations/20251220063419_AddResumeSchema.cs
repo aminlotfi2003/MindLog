@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MindLog.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddPersonalProfileAndResumeSchema : Migration
+    public partial class AddResumeSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,8 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSUTCDATETIME()"),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true, defaultValueSql: "SYSUTCDATETIME()"),
                     FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Headline = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Website = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
@@ -187,16 +186,84 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EducationRecords_FieldOfStudy",
+                schema: "app",
+                table: "EducationRecords",
+                column: "FieldOfStudy",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EducationRecords_ProfileId",
                 schema: "app",
                 table: "EducationRecords",
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LanguageProficiencies_Language",
+                schema: "app",
+                table: "LanguageProficiencies",
+                column: "Language",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LanguageProficiencies_ProfileId",
                 schema: "app",
                 table: "LanguageProficiencies",
                 column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_Email",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_FullName",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "FullName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_GitHubUrl",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "GitHubUrl",
+                unique: true,
+                filter: "[GitHubUrl] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_LinkedInUrl",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "LinkedInUrl",
+                unique: true,
+                filter: "[LinkedInUrl] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_PhoneNumber",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "PhoneNumber",
+                unique: true,
+                filter: "[PhoneNumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalProfiles_Website",
+                schema: "app",
+                table: "PersonalProfiles",
+                column: "Website",
+                unique: true,
+                filter: "[Website] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SkillItems_Name",
+                schema: "app",
+                table: "SkillItems",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillItems_ProfileId",
@@ -211,10 +278,23 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TrainingCourses_Title",
+                schema: "app",
+                table: "TrainingCourses",
+                column: "Title",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WorkExperiences_ProfileId",
                 schema: "app",
                 table: "WorkExperiences",
                 column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkExperiences_RoleTitle",
+                schema: "app",
+                table: "WorkExperiences",
+                column: "RoleTitle");
         }
 
         /// <inheritdoc />

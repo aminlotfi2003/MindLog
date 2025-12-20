@@ -31,5 +31,7 @@ public class TrainingCourseConfiguration : IEntityTypeConfiguration<TrainingCour
         builder.HasOne(x => x.Profile)
             .WithMany(y => y.Courses)
             .HasForeignKey(x => x.ProfileId);
+
+        builder.HasIndex(x => x.Title).IsUnique();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MindLog.Application.Features.Courses.Dtos;
 
 namespace MindLog.Application.Features.Courses.Commands.CreateCourse;
 
@@ -11,7 +12,7 @@ public sealed record CreateCourseCommand(
     int SortOrder
 ) : IRequest<Guid>
 {
-    public static CreateCourseCommand FromDto(CreateCourseCommand dto) =>
+    public static CreateCourseCommand FromDto(CreateCourseDto dto) =>
         new(
             dto.ProfileId,
             dto.Title,

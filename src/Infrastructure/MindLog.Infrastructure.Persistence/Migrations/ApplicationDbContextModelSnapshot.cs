@@ -185,6 +185,9 @@ namespace MindLog.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FieldOfStudy")
+                        .IsUnique();
+
                     b.HasIndex("ProfileId");
 
                     b.ToTable("EducationRecords", "app");
@@ -222,6 +225,9 @@ namespace MindLog.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Language")
+                        .IsUnique();
+
                     b.HasIndex("ProfileId");
 
                     b.ToTable("LanguageProficiencies", "app");
@@ -237,31 +243,76 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTimeOffset?>("BirthDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateOnly?>("BirthDate")
+                        .HasColumnType("date");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
                         .HasDefaultValueSql("SYSUTCDATETIME()");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("Email");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Headline")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("GitHubUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("GitHubUrl");
+
+                    b.Property<string>("LinkedInUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("LinkedInUrl");
 
                     b.Property<DateTimeOffset?>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
                         .HasDefaultValueSql("SYSUTCDATETIME()");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PhoneNumber");
+
                     b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Website")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasColumnName("Website");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("FullName")
+                        .IsUnique();
+
+                    b.HasIndex("GitHubUrl")
+                        .IsUnique()
+                        .HasFilter("[GitHubUrl] IS NOT NULL");
+
+                    b.HasIndex("LinkedInUrl")
+                        .IsUnique()
+                        .HasFilter("[LinkedInUrl] IS NOT NULL");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique()
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
+
+                    b.HasIndex("Website")
+                        .IsUnique()
+                        .HasFilter("[Website] IS NOT NULL");
 
                     b.ToTable("PersonalProfiles", "app");
                 });
@@ -302,6 +353,9 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("ProfileId");
 
@@ -351,6 +405,9 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("TrainingCourses", "app");
                 });
@@ -412,6 +469,8 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
+
+                    b.HasIndex("RoleTitle");
 
                     b.ToTable("WorkExperiences", "app");
                 });
@@ -772,44 +831,6 @@ namespace MindLog.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("MindLog.Domain.Entities.PersonalProfile", b =>
                 {
-                    b.OwnsOne("MindLog.Domain.ValueObjects.ContactInfo", "ContactInfo", b1 =>
-                        {
-                            b1.Property<Guid>("PersonalProfileId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Email")
-                                .HasMaxLength(500)
-                                .HasColumnType("nvarchar(500)")
-                                .HasColumnName("Email");
-
-                            b1.Property<string>("GitHubUrl")
-                                .HasMaxLength(500)
-                                .HasColumnType("nvarchar(500)")
-                                .HasColumnName("GitHubUrl");
-
-                            b1.Property<string>("LinkedInUrl")
-                                .HasMaxLength(500)
-                                .HasColumnType("nvarchar(500)")
-                                .HasColumnName("LinkedInUrl");
-
-                            b1.Property<string>("PhoneNumber")
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("PhoneNumber");
-
-                            b1.Property<string>("Website")
-                                .HasMaxLength(500)
-                                .HasColumnType("nvarchar(500)")
-                                .HasColumnName("Website");
-
-                            b1.HasKey("PersonalProfileId");
-
-                            b1.ToTable("PersonalProfiles", "app");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PersonalProfileId");
-                        });
-
                     b.OwnsOne("MindLog.Domain.ValueObjects.ProfileImage", "Image", b1 =>
                         {
                             b1.Property<Guid>("PersonalProfileId")
@@ -841,9 +862,6 @@ namespace MindLog.Infrastructure.Persistence.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("PersonalProfileId");
                         });
-
-                    b.Navigation("ContactInfo")
-                        .IsRequired();
 
                     b.Navigation("Image");
                 });
