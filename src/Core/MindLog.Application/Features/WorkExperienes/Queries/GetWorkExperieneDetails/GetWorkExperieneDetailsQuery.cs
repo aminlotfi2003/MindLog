@@ -1,0 +1,6 @@
+﻿using MediatR;
+using MindLog.Application.Features.WorkExperienes.Dtos;
+
+namespace MindLog.Application.Features.WorkExperienes.Queries.GetWorkExperieneDetails;
+
+public record GetWorkExperieneDetailsQuery(Guid Id) : IRequest<WorkExperieneDetailsDto>;
