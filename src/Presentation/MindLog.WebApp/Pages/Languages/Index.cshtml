@@ -1,0 +1,68 @@
+@page
+@model MindLog.WebApp.Pages.Languages.IndexModel
+@using MindLog.Domain.Enums
+@{
+    ViewData["Title"] = "زبان‌ها";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">مهارت‌های زبانی</p>
+        <h1 class="page-title h4 mb-2">فهرست زبان‌های رزومه</h1>
+        <p class="page-subtitle">سطح زبان و مدارک مرتبط را به‌صورت شفاف مدیریت کنید.</p>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-page="Create" class="btn btn-primary">ثبت زبان جدید</a>
+    }
+</section>
+
+@if (Model.Languages.Count == 0)
+{
+    <div class="glass-card p-4">زبانی ثبت نشده است.</div>
+}
+else
+{
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
+                <tr>
+                    <th>پروفایل</th>
+                    <th>زبان</th>
+                    <th>سطح</th>
+                    <th>ترتیب نمایش</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var language in Model.Languages)
+                {
+                    <tr>
+                        <td>@language.FullName</td>
+                        <td>@language.Language</td>
+                        <td>@(language.Level switch
+                            {
+                                LanguageLevel.A1 => "A1 - پایه",
+                                LanguageLevel.A2 => "A2 - ابتدایی",
+                                LanguageLevel.B1 => "B1 - متوسط",
+                                LanguageLevel.B2 => "B2 - خوب",
+                                LanguageLevel.C1 => "C1 - پیشرفته",
+                                LanguageLevel.C2 => "C2 - حرفه‌ای",
+                                _ => "زبان مادری"
+                            })</td>
+                        <td>@language.SortOrder</td>
+                        <td>@language.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="Details" asp-route-id="@language.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-page="Edit" asp-route-id="@language.Id" class="btn btn-sm btn-primary">ویرایش</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

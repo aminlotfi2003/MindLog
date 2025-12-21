@@ -1,0 +1,58 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Languages.EditModel
+@{
+    ViewData["Title"] = "ویرایش زبان";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">ویرایش مهارت زبانی</p>
+        <h1 class="page-title h4 mb-2">بروزرسانی اطلاعات زبان</h1>
+        <p class="page-subtitle">سطح و گواهی زبان را بر اساس جدیدترین وضعیت ثبت کنید.</p>
+    </div>
+    <a asp-page="Details" asp-route-id="@Model.Input.Id" class="btn btn-outline-secondary">بازگشت به جزئیات</a>
+</section>
+
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Input.Id" type="hidden" />
+
+        <div class="col-md-6">
+            <label asp-for="Input.ProfileId" class="form-label"></label>
+            <select asp-for="Input.ProfileId" asp-items="Model.ProfileOptions" class="form-select">
+                <option value="">انتخاب پروفایل...</option>
+            </select>
+            <span asp-validation-for="Input.ProfileId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Language" class="form-label"></label>
+            <input asp-for="Input.Language" class="form-control" />
+            <span asp-validation-for="Input.Language" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Level" class="form-label"></label>
+            <select asp-for="Input.Level" asp-items="Model.LevelOptions" class="form-select"></select>
+            <span asp-validation-for="Input.Level" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.SortOrder" class="form-label"></label>
+            <input asp-for="Input.SortOrder" type="number" min="0" class="form-control" />
+            <span asp-validation-for="Input.SortOrder" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.Certificate" class="form-label"></label>
+            <input asp-for="Input.Certificate" class="form-control" />
+            <span asp-validation-for="Input.Certificate" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+            <a asp-page="Details" asp-route-id="@Model.Input.Id" class="btn btn-outline-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

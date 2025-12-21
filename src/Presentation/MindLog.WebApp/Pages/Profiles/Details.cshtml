@@ -1,0 +1,72 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Profiles.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات پروفایل";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">نمای کلی پروفایل</p>
+        <h1 class="page-title h4 mb-2">@Model.Profile.FullName</h1>
+        <p class="page-subtitle">اطلاعات شخصی، تماس و لینک‌های حرفه‌ای برای استفاده در رزومه.</p>
+    </div>
+    <div class="d-flex gap-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.Profile.Id" class="btn btn-primary">ویرایش</a>
+        }
+        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+    </div>
+</section>
+
+<div class="glass-card p-4 mb-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ ایجاد</p>
+            <strong>@Model.Profile.CreatedAt.ToString("yyyy/MM/dd")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">آخرین بروزرسانی</p>
+            <strong>@(Model.Profile.ModifiedAt?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ تولد</p>
+            <strong>@(Model.Profile.BirthDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شماره تماس</p>
+            <strong>@(Model.Profile.PhoneNumber ?? "-")</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4 mb-3">
+    <h2 class="h6 mb-3">اطلاعات ارتباطی و آنلاین</h2>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ایمیل</p>
+            <strong>@(Model.Profile.Email ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">وب‌سایت</p>
+            <strong>@(Model.Profile.Website ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">لینکدین</p>
+            <strong>@(Model.Profile.LinkedInUrl ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">گیت‌هاب</p>
+            <strong>@(Model.Profile.GitHubUrl ?? "-")</strong>
+        </div>
+        <div class="col-12">
+            <p class="mb-1 text-muted">آدرس</p>
+            <strong>@(Model.Profile.Address ?? "-")</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4">
+    <h2 class="h6 mb-3">خلاصه حرفه‌ای</h2>
+    <p class="mb-0">@(string.IsNullOrWhiteSpace(Model.Profile.Summary) ? "خلاصه‌ای ثبت نشده است." : Model.Profile.Summary)</p>
+</div>

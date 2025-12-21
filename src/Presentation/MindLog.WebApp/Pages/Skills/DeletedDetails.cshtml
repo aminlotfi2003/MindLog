@@ -1,0 +1,48 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Skills.DeletedDetailsModel
+@using MindLog.Domain.Enums
+@{
+    ViewData["Title"] = "جزئیات مهارت حذف‌شده";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">جزئیات مهارت حذف‌شده</p>
+        <h1 class="page-title h4 mb-2">@Model.Skill.Name</h1>
+        <p class="page-subtitle">نمایش سطح و دسته‌بندی برای تصمیم‌گیری درباره بازیابی.</p>
+    </div>
+    <a asp-page="Deleted" class="btn btn-outline-secondary">بازگشت به آرشیو</a>
+</section>
+
+<div class="glass-card p-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شناسه پروفایل</p>
+            <strong>@Model.Skill.ProfileId</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">سطح مهارت</p>
+            <strong>@(Model.Skill.Level switch
+                {
+                    SkillLevel.Beginner => "مبتدی",
+                    SkillLevel.Intermediate => "متوسط",
+                    SkillLevel.Advanced => "پیشرفته",
+                    _ => "خبره"
+                })</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">دسته‌بندی</p>
+            <strong>@(Model.Skill.Category switch
+                {
+                    SkillCategory.Technical => "فنی",
+                    SkillCategory.SoftSkill => "مهارت نرم",
+                    SkillCategory.Tooling => "ابزارها",
+                    _ => "دانش حوزه"
+                })</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ترتیب نمایش</p>
+            <strong>@Model.Skill.SortOrder</strong>
+        </div>
+    </div>
+</div>

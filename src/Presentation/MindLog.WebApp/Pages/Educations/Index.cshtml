@@ -1,0 +1,62 @@
+@page
+@model MindLog.WebApp.Pages.Educations.IndexModel
+@{
+    ViewData["Title"] = "سوابق تحصیلی";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">سوابق تحصیلی رزومه</p>
+        <h1 class="page-title h4 mb-2">لیست سوابق تحصیلی</h1>
+        <p class="page-subtitle">مرور و مدیریت مدارک تحصیلی در کنار اطلاعات پروفایل.</p>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="d-flex gap-2">
+            <a asp-page="Create" class="btn btn-primary">ثبت سابقه تحصیلی</a>
+            <a asp-page="Deleted" class="btn btn-outline-secondary">حذف‌شده‌ها</a>
+        </div>
+    }
+</section>
+
+@if (Model.Educations.Count == 0)
+{
+    <div class="glass-card p-4">سابقه تحصیلی ثبت نشده است.</div>
+}
+else
+{
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
+                <tr>
+                    <th>پروفایل</th>
+                    <th>مدرک</th>
+                    <th>رشته</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var education in Model.Educations)
+                {
+                    <tr>
+                        <td>@education.FullName</td>
+                        <td>@education.Degree</td>
+                        <td>@education.FieldOfStudy</td>
+                        <td>@education.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="Details" asp-route-id="@education.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-page="Edit" asp-route-id="@education.Id" class="btn btn-sm btn-primary">ویرایش</a>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@education.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

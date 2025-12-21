@@ -1,0 +1,53 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Courses.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات دوره";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">جزئیات دوره آموزشی</p>
+        <h1 class="page-title h4 mb-2">@Model.Course.Title</h1>
+        <p class="page-subtitle">اطلاعات ارائه‌دهنده، تاریخ تکمیل و لینک گواهی دوره.</p>
+    </div>
+    <div class="d-flex gap-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.Course.Id" class="btn btn-primary">ویرایش</a>
+        }
+        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+    </div>
+</section>
+
+<div class="glass-card p-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شناسه پروفایل</p>
+            <strong>@Model.Course.ProfileId</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ارائه‌دهنده</p>
+            <strong>@(Model.Course.Provider ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ تکمیل</p>
+            <strong>@(Model.Course.CompletionDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ترتیب نمایش</p>
+            <strong>@Model.Course.SortOrder</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ ایجاد</p>
+            <strong>@Model.Course.CreatedAt.ToString("yyyy/MM/dd")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">آخرین ویرایش</p>
+            <strong>@(Model.Course.ModifiedAt?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-12">
+            <p class="mb-1 text-muted">لینک گواهی</p>
+            <strong>@(Model.Course.CertificateUrl ?? "ثبت نشده")</strong>
+        </div>
+    </div>
+</div>

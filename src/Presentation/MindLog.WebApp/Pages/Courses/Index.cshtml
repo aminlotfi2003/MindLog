@@ -1,0 +1,64 @@
+@page
+@model MindLog.WebApp.Pages.Courses.IndexModel
+@{
+    ViewData["Title"] = "دوره‌ها";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">دوره‌های آموزشی</p>
+        <h1 class="page-title h4 mb-2">فهرست دوره‌های آموزشی</h1>
+        <p class="page-subtitle">برای نمایش دوره‌ها و گواهی‌های معتبر در رزومه.</p>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="d-flex gap-2">
+            <a asp-page="Create" class="btn btn-primary">ثبت دوره جدید</a>
+            <a asp-page="Deleted" class="btn btn-outline-secondary">حذف‌شده‌ها</a>
+        </div>
+    }
+</section>
+
+@if (Model.Courses.Count == 0)
+{
+    <div class="glass-card p-4">دوره‌ای ثبت نشده است.</div>
+}
+else
+{
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
+                <tr>
+                    <th>پروفایل</th>
+                    <th>عنوان دوره</th>
+                    <th>تاریخ تکمیل</th>
+                    <th>ترتیب نمایش</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model.Courses)
+                {
+                    <tr>
+                        <td>@course.FullName</td>
+                        <td>@course.Title</td>
+                        <td>@(course.CompletionDate?.ToString("yyyy/MM/dd") ?? "-")</td>
+                        <td>@course.SortOrder</td>
+                        <td>@course.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="Details" asp-route-id="@course.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-page="Edit" asp-route-id="@course.Id" class="btn btn-sm btn-primary">ویرایش</a>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@course.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

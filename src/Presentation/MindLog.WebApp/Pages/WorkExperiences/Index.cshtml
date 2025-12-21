@@ -1,0 +1,81 @@
+@page
+@model MindLog.WebApp.Pages.WorkExperiences.IndexModel
+@using MindLog.Domain.Enums
+@{
+    ViewData["Title"] = "سوابق کاری";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">سوابق شغلی</p>
+        <h1 class="page-title h4 mb-2">فهرست سوابق کاری</h1>
+        <p class="page-subtitle">نمایش تجربه‌های حرفه‌ای به تفکیک نقش و شرکت.</p>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="d-flex gap-2">
+            <a asp-page="Create" class="btn btn-primary">ثبت سابقه کاری</a>
+            <a asp-page="Deleted" class="btn btn-outline-secondary">حذف‌شده‌ها</a>
+        </div>
+    }
+</section>
+
+@if (Model.WorkExperiences.Count == 0)
+{
+    <div class="glass-card p-4">سابقه کاری ثبت نشده است.</div>
+}
+else
+{
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
+                <tr>
+                    <th>پروفایل</th>
+                    <th>شرکت</th>
+                    <th>عنوان نقش</th>
+                    <th>نوع همکاری</th>
+                    <th>نحوه کار</th>
+                    <th>ترتیب نمایش</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var experience in Model.WorkExperiences)
+                {
+                    <tr>
+                        <td>@experience.FullName</td>
+                        <td>@experience.Company</td>
+                        <td>@experience.RoleTitle</td>
+                        <td>@(experience.EmploymentType switch
+                            {
+                                EmploymentType.FullTime => "تمام‌وقت",
+                                EmploymentType.PartTime => "پاره‌وقت",
+                                EmploymentType.Contract => "قراردادی",
+                                EmploymentType.Freelance => "فریلنس",
+                                _ => "کارآموزی"
+                            })</td>
+                        <td>@(experience.WorkMode switch
+                            {
+                                WorkMode.OnSite => "حضوری",
+                                WorkMode.Remote => "دورکاری",
+                                _ => "ترکیبی"
+                            })</td>
+                        <td>@experience.SortOrder</td>
+                        <td>@experience.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="Details" asp-route-id="@experience.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-page="Edit" asp-route-id="@experience.Id" class="btn btn-sm btn-primary">ویرایش</a>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@experience.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,73 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Educations.EditModel
+@{
+    ViewData["Title"] = "ویرایش سابقه تحصیلی";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">ویرایش سابقه تحصیلی</p>
+        <h1 class="page-title h4 mb-2">بروزرسانی اطلاعات تحصیل</h1>
+        <p class="page-subtitle">اطلاعات مدرک و رشته را با آخرین وضعیت بروزرسانی کنید.</p>
+    </div>
+    <a asp-page="Details" asp-route-id="@Model.Input.Id" class="btn btn-outline-secondary">بازگشت به جزئیات</a>
+</section>
+
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Input.Id" type="hidden" />
+
+        <div class="col-md-6">
+            <label asp-for="Input.ProfileId" class="form-label"></label>
+            <select asp-for="Input.ProfileId" asp-items="Model.ProfileOptions" class="form-select">
+                <option value="">انتخاب پروفایل...</option>
+            </select>
+            <span asp-validation-for="Input.ProfileId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Institution" class="form-label"></label>
+            <input asp-for="Input.Institution" class="form-control" />
+            <span asp-validation-for="Input.Institution" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Degree" class="form-label"></label>
+            <input asp-for="Input.Degree" class="form-control" />
+            <span asp-validation-for="Input.Degree" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.FieldOfStudy" class="form-label"></label>
+            <input asp-for="Input.FieldOfStudy" class="form-control" />
+            <span asp-validation-for="Input.FieldOfStudy" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.StartDate" class="form-label"></label>
+            <input asp-for="Input.StartDate" type="date" class="form-control" />
+            <span asp-validation-for="Input.StartDate" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.EndDate" class="form-label"></label>
+            <input asp-for="Input.EndDate" type="date" class="form-control" />
+            <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.Description" class="form-label"></label>
+            <textarea asp-for="Input.Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Input.Description" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Input.SortOrder" class="form-label"></label>
+            <input asp-for="Input.SortOrder" class="form-control" type="number" min="0" />
+            <span asp-validation-for="Input.SortOrder" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+            <a asp-page="Details" asp-route-id="@Model.Input.Id" class="btn btn-outline-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

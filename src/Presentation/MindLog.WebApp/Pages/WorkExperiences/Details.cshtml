@@ -1,0 +1,75 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.WorkExperiences.DetailsModel
+@using MindLog.Domain.Enums
+@{
+    ViewData["Title"] = "جزئیات سابقه کاری";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">جزئیات سابقه کاری</p>
+        <h1 class="page-title h4 mb-2">@Model.WorkExperience.RoleTitle</h1>
+        <p class="page-subtitle">اطلاعات نقش، شرکت و شرح مسئولیت‌ها.</p>
+    </div>
+    <div class="d-flex gap-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.WorkExperience.Id" class="btn btn-primary">ویرایش</a>
+        }
+        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+    </div>
+</section>
+
+<div class="glass-card p-4 mb-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شناسه پروفایل</p>
+            <strong>@Model.WorkExperience.ProfileId</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شرکت</p>
+            <strong>@Model.WorkExperience.Company</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">نوع همکاری</p>
+            <strong>@(Model.WorkExperience.EmploymentType switch
+                {
+                    EmploymentType.FullTime => "تمام‌وقت",
+                    EmploymentType.PartTime => "پاره‌وقت",
+                    EmploymentType.Contract => "قراردادی",
+                    EmploymentType.Freelance => "فریلنس",
+                    _ => "کارآموزی"
+                })</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">نحوه کار</p>
+            <strong>@(Model.WorkExperience.WorkMode switch
+                {
+                    WorkMode.OnSite => "حضوری",
+                    WorkMode.Remote => "دورکاری",
+                    _ => "ترکیبی"
+                })</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ شروع</p>
+            <strong>@Model.WorkExperience.StartDate.ToString("yyyy/MM/dd")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ پایان</p>
+            <strong>@(Model.WorkExperience.EndDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">موقعیت مکانی</p>
+            <strong>@(Model.WorkExperience.Location ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ترتیب نمایش</p>
+            <strong>@Model.WorkExperience.SortOrder</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4">
+    <h2 class="h6 mb-2">شرح مسئولیت‌ها</h2>
+    <p class="mb-0">@(string.IsNullOrWhiteSpace(Model.WorkExperience.Description) ? "توضیحی ثبت نشده است." : Model.WorkExperience.Description)</p>
+</div>

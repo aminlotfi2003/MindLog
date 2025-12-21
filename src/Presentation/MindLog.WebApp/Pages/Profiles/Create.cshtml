@@ -1,0 +1,75 @@
+@page
+@model MindLog.WebApp.Pages.Profiles.CreateModel
+@{
+    ViewData["Title"] = "ایجاد پروفایل";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">پروفایل جدید</p>
+        <h1 class="page-title h4 mb-2">ایجاد پروفایل شخصی برای رزومه</h1>
+        <p class="page-subtitle">اطلاعات هویتی و تماس را با دقت وارد کنید تا خروجی رزومه حرفه‌ای‌تر باشد.</p>
+    </div>
+    <a asp-page="Index" class="btn btn-outline-secondary">بازگشت به فهرست</a>
+</section>
+
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="Input.FullName" class="form-label"></label>
+            <input asp-for="Input.FullName" class="form-control" placeholder="نام و نام خانوادگی" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.BirthDate" class="form-label"></label>
+            <input asp-for="Input.BirthDate" class="form-control" type="date" />
+            <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.Summary" class="form-label"></label>
+            <textarea asp-for="Input.Summary" class="form-control" rows="3" placeholder="خلاصه‌ای درباره تخصص و تجربه"></textarea>
+            <span asp-validation-for="Input.Summary" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Email" class="form-label"></label>
+            <input asp-for="Input.Email" class="form-control" placeholder="example@email.com" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.PhoneNumber" class="form-label"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="شماره تماس" />
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Website" class="form-label"></label>
+            <input asp-for="Input.Website" class="form-control" placeholder="https://your-site.com" />
+            <span asp-validation-for="Input.Website" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.LinkedInUrl" class="form-label"></label>
+            <input asp-for="Input.LinkedInUrl" class="form-control" placeholder="لینک پروفایل لینکدین" />
+            <span asp-validation-for="Input.LinkedInUrl" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.GitHubUrl" class="form-label"></label>
+            <input asp-for="Input.GitHubUrl" class="form-control" placeholder="لینک گیت‌هاب" />
+            <span asp-validation-for="Input.GitHubUrl" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Address" class="form-label"></label>
+            <input asp-for="Input.Address" class="form-control" placeholder="آدرس یا شهر محل سکونت" />
+            <span asp-validation-for="Input.Address" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ذخیره پروفایل</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

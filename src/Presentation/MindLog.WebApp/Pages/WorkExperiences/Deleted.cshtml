@@ -1,0 +1,62 @@
+@page
+@model MindLog.WebApp.Pages.WorkExperiences.DeletedModel
+@using MindLog.Domain.Enums
+@{
+    ViewData["Title"] = "سوابق کاری حذف‌شده";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">آرشیو سوابق کاری</p>
+        <h1 class="page-title h4 mb-2">سوابق کاری حذف‌شده</h1>
+        <p class="page-subtitle">برای بازیابی تجربه‌های حذف‌شده از این بخش استفاده کنید.</p>
+    </div>
+    <a asp-page="Index" class="btn btn-outline-secondary">بازگشت به سوابق فعال</a>
+</section>
+
+@if (Model.WorkExperiences.Count == 0)
+{
+    <div class="glass-card p-4">سابقه حذف‌شده‌ای وجود ندارد.</div>
+}
+else
+{
+    <div class="glass-card p-0">
+        <table class="table table-hover align-middle mb-0 text-center">
+            <thead>
+                <tr>
+                    <th>پروفایل</th>
+                    <th>شرکت</th>
+                    <th>عنوان نقش</th>
+                    <th>نوع همکاری</th>
+                    <th>تاریخ حذف</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var experience in Model.WorkExperiences)
+                {
+                    <tr>
+                        <td>@experience.FullName</td>
+                        <td>@experience.Company</td>
+                        <td>@experience.RoleTitle</td>
+                        <td>@(experience.EmploymentType switch
+                            {
+                                EmploymentType.FullTime => "تمام‌وقت",
+                                EmploymentType.PartTime => "پاره‌وقت",
+                                EmploymentType.Contract => "قراردادی",
+                                EmploymentType.Freelance => "فریلنس",
+                                _ => "کارآموزی"
+                            })</td>
+                        <td>@(experience.DeletedAt?.ToString("yyyy/MM/dd") ?? "-")</td>
+                        <td class="d-flex justify-content-center gap-2">
+                            <a asp-page="DeletedDetails" asp-route-id="@experience.Id" class="btn btn-sm btn-outline-secondary">جزئیات</a>
+                            <form method="post" asp-page-handler="Restore" asp-route-id="@experience.Id" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-primary">بازیابی</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

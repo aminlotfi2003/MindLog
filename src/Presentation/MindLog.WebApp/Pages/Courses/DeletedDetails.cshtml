@@ -1,0 +1,39 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Courses.DeletedDetailsModel
+@{
+    ViewData["Title"] = "جزئیات دوره حذف‌شده";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">جزئیات دوره حذف‌شده</p>
+        <h1 class="page-title h4 mb-2">@Model.Course.Title</h1>
+        <p class="page-subtitle">اطلاعات دوره حذف‌شده برای بررسی قبل از بازیابی.</p>
+    </div>
+    <a asp-page="Deleted" class="btn btn-outline-secondary">بازگشت به آرشیو</a>
+</section>
+
+<div class="glass-card p-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شناسه پروفایل</p>
+            <strong>@Model.Course.ProfileId</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ارائه‌دهنده</p>
+            <strong>@(Model.Course.Provider ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ تکمیل</p>
+            <strong>@(Model.Course.CompletionDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ترتیب نمایش</p>
+            <strong>@Model.Course.SortOrder</strong>
+        </div>
+        <div class="col-12">
+            <p class="mb-1 text-muted">لینک گواهی</p>
+            <strong>@(Model.Course.CertificateUrl ?? "ثبت نشده")</strong>
+        </div>
+    </div>
+</div>

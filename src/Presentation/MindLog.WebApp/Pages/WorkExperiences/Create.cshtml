@@ -1,0 +1,82 @@
+@page
+@model MindLog.WebApp.Pages.WorkExperiences.CreateModel
+@{
+    ViewData["Title"] = "ثبت سابقه کاری";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">افزودن سابقه کاری</p>
+        <h1 class="page-title h4 mb-2">ثبت تجربه شغلی جدید</h1>
+        <p class="page-subtitle">نقش، شرکت و بازه زمانی را با جزئیات وارد کنید.</p>
+    </div>
+    <a asp-page="Index" class="btn btn-outline-secondary">بازگشت به فهرست</a>
+</section>
+
+<div class="glass-card p-4">
+    <form method="post" class="row g-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="Input.ProfileId" class="form-label"></label>
+            <select asp-for="Input.ProfileId" asp-items="Model.ProfileOptions" class="form-select">
+                <option value="">انتخاب پروفایل...</option>
+            </select>
+            <span asp-validation-for="Input.ProfileId" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Company" class="form-label"></label>
+            <input asp-for="Input.Company" class="form-control" placeholder="نام شرکت" />
+            <span asp-validation-for="Input.Company" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.RoleTitle" class="form-label"></label>
+            <input asp-for="Input.RoleTitle" class="form-control" placeholder="عنوان نقش" />
+            <span asp-validation-for="Input.RoleTitle" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.EmploymentType" class="form-label"></label>
+            <select asp-for="Input.EmploymentType" asp-items="Model.EmploymentTypeOptions" class="form-select"></select>
+            <span asp-validation-for="Input.EmploymentType" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.WorkMode" class="form-label"></label>
+            <select asp-for="Input.WorkMode" asp-items="Model.WorkModeOptions" class="form-select"></select>
+            <span asp-validation-for="Input.WorkMode" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.StartDate" class="form-label"></label>
+            <input asp-for="Input.StartDate" type="date" class="form-control" />
+            <span asp-validation-for="Input.StartDate" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.EndDate" class="form-label"></label>
+            <input asp-for="Input.EndDate" type="date" class="form-control" />
+            <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.Location" class="form-label"></label>
+            <input asp-for="Input.Location" class="form-control" placeholder="شهر یا کشور" />
+            <span asp-validation-for="Input.Location" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            <label asp-for="Input.Description" class="form-label"></label>
+            <textarea asp-for="Input.Description" class="form-control" rows="3" placeholder="شرح دستاوردها و مسئولیت‌ها"></textarea>
+            <span asp-validation-for="Input.Description" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Input.SortOrder" class="form-label"></label>
+            <input asp-for="Input.SortOrder" type="number" min="0" class="form-control" />
+            <span asp-validation-for="Input.SortOrder" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">ذخیره سابقه</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">انصراف</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,50 @@
+@page "{id:guid}"
+@model MindLog.WebApp.Pages.Educations.DetailsModel
+@{
+    ViewData["Title"] = "جزئیات سابقه تحصیلی";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow mb-1">نمای کلی تحصیلات</p>
+        <h1 class="page-title h4 mb-2">@Model.Education.Degree - @Model.Education.FieldOfStudy</h1>
+        <p class="page-subtitle">اطلاعات دانشگاه و بازه زمانی تحصیل برای پروفایل منتخب.</p>
+    </div>
+    <div class="d-flex gap-2">
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="Edit" asp-route-id="@Model.Education.Id" class="btn btn-primary">ویرایش</a>
+        }
+        <a asp-page="Index" class="btn btn-outline-secondary">بازگشت</a>
+    </div>
+</section>
+
+<div class="glass-card p-4 mb-3">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">شناسه پروفایل</p>
+            <strong>@Model.Education.ProfileId</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">موسسه آموزشی</p>
+            <strong>@Model.Education.Institution</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ شروع</p>
+            <strong>@(Model.Education.StartDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">تاریخ پایان</p>
+            <strong>@(Model.Education.EndDate?.ToString("yyyy/MM/dd") ?? "-")</strong>
+        </div>
+        <div class="col-md-6">
+            <p class="mb-1 text-muted">ترتیب نمایش</p>
+            <strong>@Model.Education.SortOrder</strong>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4">
+    <h2 class="h6 mb-2">توضیحات تکمیلی</h2>
+    <p class="mb-0">@(string.IsNullOrWhiteSpace(Model.Education.Description) ? "توضیحی ثبت نشده است." : Model.Education.Description)</p>
+</div>
